@@ -1,0 +1,50 @@
+سایت خود django
+نصب و  روی  virtualenv
+ایجاد پروژه
+توضیح فایل ها 
+اجرا اولیه python manage.py runserver
+سوال :‌چگونه پورت دیفالت آن را تغییر دهیم و چگونه روی یک ای پی خاص اجرا کنیم ؟
+ساخت اپ و توضیح ان که چه فرقی داره با project
+اضافه کردن  app به installed_app
+چرا باید آن را اضافه کنیم ؟ 
+https://stackoverflow.com/questions/47684387/what-is-the-purpose-of-adding-to-installed-apps-in-django/47684488
+
+تمرین : میخواهیم یک سایت فروشگاهی طراحی کنیم یک پروژه برای بسازید و اپ های مورد نیاز آن را برایش ایجاد کنید.
+
+توضیح ابتدایی درمورد view , include url on mainUrl
+مثال ساده httpResponse , نمایش hellowrld
+from django.http import HttpResponse
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+توضیح در مورد orm 
+توضیح در مورد python maigrate , python manage.py makemigrations
+توضیح ابتدایی درمورد ادمین 
+ساخت super user
+نمایش ادمین 
+
+لینک های که باید خوانده شود
+https://docs.djangoproject.com/en/3.2/intro/tutorial03/
+https://docs.djangoproject.com/en/3.2/topics/db/models/
+https://docs.djangoproject.com/en/3.2/ref/models/fields/
+
+on_delete : https://stackoverflow.com/questions/38388423/what-does-on-delete-do-on-django-models
+
+defult django user:
+from django.contrib.auth.models import User
+
+updated_on = models.DateTimeField(auto_now= True)
+created_on = models.DateTimeField(auto_now_add=True)
+
+# گفته نشده هنوز مطالب پایین
+'DIRS': [os.path.join(BASE_DIR,'templates')],
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+  # os.path.join(BASE_DIR, "static"),
+  str(BASE_DIR / "static"),
+]
+STATIC_ROOT = '/home/safinero/nejat.safine.co/static'
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# MEDIA_ROOT =  str(BASE_DIR /'media')
+
