@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -26,10 +26,10 @@ class Post(models.Model):
     NOT = 'not'
     
     STATUS_CHOICES = [
-        ('pub','publish'),
-        ('drf','draft'),
-        ('del','delete'),
-        ('not','notset'),
+        (PUB,'publish'),
+        (DRF,'draft'),
+        (DEL,'delete'),
+        (NOT,'notset'),
     ]
     title = models.CharField('title post' ,max_length=255)
     shortdesc = models.CharField( 'short description',max_length=255,null=True,blank=True)
@@ -52,12 +52,13 @@ class Post(models.Model):
         default=PUB,
     )
     # tag
+    tag = models.ManyToManyField('Tag')
     # comment
+    # comment = models.ForeignKey('comment',on_delete=models.CASCADE) 
     # category
     category = models.ManyToManyField('Category')
-
-
-    # author
+    # owner
+    owner = models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='post owner')
 
 
     def __str__(self):
@@ -76,10 +77,6 @@ class Comment(models.Model):
     def __str__(self):
         return self.title
 
-
-
-
-
 class Category(models.Model):
     
     parent = models.ForeignKey('self',on_delete=models.CASCADE,blank=True,null=True)
@@ -91,6 +88,14 @@ class Category(models.Model):
 
 
 
+class Tag(models.Model):
+    title = models.CharField('title' ,max_length=255)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    
 
 
 
