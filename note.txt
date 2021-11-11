@@ -55,3 +55,22 @@ STATIC_ROOT = '/home/safinero/nejat.safine.co/static'
 # MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # MEDIA_ROOT =  str(BASE_DIR /'media')
 
+
+>> new_user= User(username="maktabsharif60",first_name="maktab",last_name="sharif",email="maktab_sharifi@gmail.com",password="mamamamdfKFLSDLK",is_active=True)
+>>> tag_1 = Tag(title='first tag')
+>>> tag_2 = Tag(title='second tag')
+>>> tag_1.save()
+>>> tag_2.save()
+
+
+from post.models import  Tag,Post,Comment,Category
+>>> all_post = Post.objects.all()
+>>> all_post[0]
+
+
+
+لینک اپشن های مدل :  همون class Meta
+https://docs.djangoproject.com/en/3.2/ref/models/options/
+
+#user django doc 
+https://docs.djangoproject.com/en/3.2/ref/contrib/auth/

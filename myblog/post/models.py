@@ -34,9 +34,9 @@ class Post(models.Model):
     title = models.CharField('title post' ,max_length=255)
     shortdesc = models.CharField( 'short description',max_length=255,null=True,blank=True)
     desc = models.TextField()
-    location_lat = models.DecimalField(max_digits=5, decimal_places=2)
-    location_lng =  models.DecimalField(max_digits=5, decimal_places=2)
-    image = models.ImageField(upload_to='uploads')
+    location_lat = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
+    location_lng =  models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
+    image = models.ImageField(upload_to='uploads',null=True,blank=True)
     like = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -53,12 +53,18 @@ class Post(models.Model):
     )
     # tag
     tag = models.ManyToManyField('Tag')
-    # comment
     # comment = models.ForeignKey('comment',on_delete=models.CASCADE) 
-    # category
     category = models.ManyToManyField('Category')
     # owner
     owner = models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='post owner')
+    # https://docs.djangoproject.com/en/3.2/topics/db/models/#model-methods
+    @property
+    def post_name(self):
+        return f"{self.title} - {self.shortdesc}"
+
+    def time_status(self):
+        # نمایش اینکه چند ساعت درست شده پست ؟ تمرین
+        return 'this is sample method'
 
 
     def __str__(self):
@@ -68,10 +74,15 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    # owner 
     title = models.CharField('title post' ,max_length=255)
     desc = models.TextField()   
     like = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
+    
+    # class Meta :
+        # unique_together = [['owner','post']]
+        # index_together
     
 
     def __str__(self):
@@ -87,13 +98,34 @@ class Category(models.Model):
         return self.title
 
 
-
+import datetime
 class Tag(models.Model):
     title = models.CharField('title' ,max_length=255)
     updated_on = models.DateTimeField(auto_now=True)
 
+    class Meta : 
+        verbose_name_plural = "tags"
+        verbose_name = "tag"
+        db_table = 'tag'
+        ordering = ['-updated_on']   # random : ?  ; ascending : -
+        
+
+       
     def __str__(self):
         return self.title
+
+
+
+# https://docs.djangoproject.com/en/3.2/ref/models/options/#order-with-respect-to
+class Question(models.Model):
+    text = models.TextField()
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text = models.TextField()
+
+    class Meta:
+        order_with_respect_to = 'question'
 
     
 
