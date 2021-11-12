@@ -73,4 +73,50 @@ from post.models import  Tag,Post,Comment,Category
 https://docs.djangoproject.com/en/3.2/ref/models/options/
 
 #user django doc 
-https://docs.djangoproject.com/en/3.2/ref/contrib/auth/
+https://docs.djangoproject.com/en/3.2/ref/contrib/auth/.
+
+
+
+
+#بحث های فردا
+کوییز کوچولو
+صحبت در مورد manager
+صحبت در مورد lazy بودن
+related_name
+m2m
+start template
+F expersion
+Q 
+توضیح درمورد چگونه کپی گرفتن instance
+لینک توضیح کوئری ها
+https://docs.djangoproject.com/en/3.2/topics/db/queries/
+
+لینک توضیح m2m
+https://docs.djangoproject.com/en/3.2/topics/db/examples/many_to_many/  
+
+# لینک های برای lazy model
+https://www.oreilly.com/library/view/django-2-by/9781788472487/c0d84fbe-ed96-47e5-b185-cf86335da8d6.xhtml
+https://stackoverflow.com/questions/20171736/when-is-a-django-queryset-evaluated
+
+
+# querySet and when QuerySet evaluated ?
+https://docs.djangoproject.com/en/3.2/ref/models/querysets/
+
+
+مثال ساخت متد
+# https://docs.djangoproject.com/en/3.2/ref/models/instances/
+https://docs.djangoproject.com/en/3.2/topics/db/models/#model-methods
+
+
+
+# توضیح درمورد منجر
+https://docs.djangoproject.com/en/3.2/topics/db/managers/#django.db.models.Manager
+https://stackoverflow.com/questions/14689237/what-is-a-manager-in-django
+
+https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-objects
+در لینک فوق نشون میده querysets چیه و یه سری توضیح خوب 
+قسمت Retrieving objects¶ خوانده شود
+
+
+templates 
+https://docs.djangoproject.com/en/3.2/intro/tutorial03/

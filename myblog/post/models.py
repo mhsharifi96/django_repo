@@ -62,18 +62,21 @@ class Post(models.Model):
     def post_name(self):
         return f"{self.title} - {self.shortdesc}"
 
-    def time_status(self):
+    def time_status(self,param1):
         # نمایش اینکه چند ساعت درست شده پست ؟ تمرین
-        return 'this is sample method'
-
+        print('data',param1)
+        
+        return param1 
 
     def __str__(self):
         return self.title
 
 
 
+
 class Comment(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    
     # owner 
     title = models.CharField('title post' ,max_length=255)
     desc = models.TextField()   
@@ -98,16 +101,15 @@ class Category(models.Model):
         return self.title
 
 
-import datetime
 class Tag(models.Model):
-    title = models.CharField('title' ,max_length=255)
+    title = models.CharField('تاتیل' ,max_length=255)
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta : 
-        verbose_name_plural = "tags"
-        verbose_name = "tag"
+        verbose_name_plural = "تگ ها "
+        verbose_name = "تگ"
         db_table = 'tag'
-        ordering = ['-updated_on']   # random : ?  ; ascending : -
+        ordering = ['-title',]   # random : ?  ; ascending : -
         
 
        
@@ -128,6 +130,9 @@ class Answer(models.Model):
         order_with_respect_to = 'question'
 
     
+
+
+
 
 
 
