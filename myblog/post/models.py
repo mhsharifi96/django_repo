@@ -75,7 +75,8 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE) #related_name="post_comment"
+    # old_post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name="old_post_comment")
     
     # owner 
     title = models.CharField('title post' ,max_length=255)
@@ -130,6 +131,7 @@ class Answer(models.Model):
         order_with_respect_to = 'question'
 
     
+
 
 
 

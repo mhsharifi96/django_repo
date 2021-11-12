@@ -80,12 +80,12 @@ https://docs.djangoproject.com/en/3.2/ref/contrib/auth/.
 
 #بحث های فردا
 کوییز کوچولو
-صحبت در مورد manager
-صحبت در مورد lazy بودن
-related_name
-m2m
+صحبت در مورد manager *
+صحبت در مورد lazy بودن *
+related_name  *
+m2m *
 start template
-F expersion
+F expersion *
 Q 
 توضیح درمورد چگونه کپی گرفتن instance
 لینک توضیح کوئری ها
@@ -120,3 +120,94 @@ https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-objects
 
 templates 
 https://docs.djangoproject.com/en/3.2/intro/tutorial03/
+
+
+
+project shop
+
+product model
+  status = a/d/s
+
+  available :  کالاهایی که دارای وضعیت فعال هستند
+  disavailable : کالاهای ناموجود
+  stop : کالاهای متوقف شده
+
+product.objects.filter(status="available")
+product.available.all()
+product.disavailable.all()
+
+
+select * from comment 
+join post on 
+where post.title = "maktab"
+
+a1 = Article.objects.get(id=1)
+a1.reporter_set.filter(first_name='John')
+
+>>> Article.objects.filter(reporter__first='John')
+
+Comment.objects.filter(post__title = "maktab")
+
+
+
+Article model
+  reporter
+
+reporter model
+  user
+
+user model
+  name
+
+a.objects.filter(reporter__user__name__contains='sina')
+
+
+Reporter.objects.order_by('?')
+Reporter.objects.order_by('first_name')
+Reporter.objects.order_by('-first_name')
+
+
+
+
+
+select * form book where price-discount >0
+
+Book.objects.all()
+
+sum_price/count
+
+select avg(price) from book
+
+
+select avg(price) from book group by publisher.id
+
+
+
+a    a_b     b
+
+
+
+book 
+  ...
+  price 25000
+  discount_percent 10%
+
+
+
+کتاب هایی را میخواهم که میزان تخفیف کتاب بیشتر از ۲۰۰۰ هزار تومن است.
+
+select * from book where  (discount_percent *price) >2000
+
+Book.objects.filter(discount_percent__gt = F(discount_percent)*price)
+
+
+
+
+
+
+مدل 
+افزودن داده 
+چگونه یک instances  ذخیره شده رو کپی کنیم
+m2m -->add/delete/update
+1 2many - add/delete/update
+
