@@ -3,11 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Blog-first</title>
 </head>
 <body>
-    this is sample post
+    <ul>
+    {% for cat in category  %}
+        <li>{{cat.title}}</li>
+    {% endfor %}
+    </ul>
+    <hr>
     {% for post in posts %}
+    <div>
+      <h1>{{post.title}}</h1>
+        <h3>{{post.shortdesc}}</h3>
+        <p>{{post.desc}}</p>
+        <p>{{post.owner.username}}</p>
+         <small>{{post.created_on}}</small>
+         {% comment %} <a href="detail/{{post.id}}/">show detail</a> {% endcomment %}
+         <a href="{% url 'detail' post.pk %}">show detail</a>
+
+        <hr>
+    </div>
+    {% endfor %}
+
+
+
+    {% comment %} {% for post in posts %}
         <h1>
             {{post.title}}
 
@@ -18,6 +39,6 @@
         <small>{{post.created_on}}</small>
         <hr>
     
-    {% endfor %}
+    {% endfor %} {% endcomment %}
 </body>
 </html>

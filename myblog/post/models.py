@@ -33,7 +33,7 @@ class Post(models.Model):
     ]
     title = models.CharField('title post' ,max_length=255)
 
-    
+        
 
     shortdesc = models.CharField( 'short description',max_length=255,null=True,blank=True)
     desc = models.TextField()

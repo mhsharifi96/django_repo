@@ -211,3 +211,10 @@ Book.objects.filter(discount_percent__gt = F(discount_percent)*price)
 m2m -->add/delete/update
 1 2many - add/delete/update
 
+
+# جلسه 27 آبان 
+django view
+توضیح که چیه ؟
+مثال ساده بریم حل کنیم 
+
+

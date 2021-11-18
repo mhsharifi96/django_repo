@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>category page</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <ul>
+    {% for cat in category  %}
+        <li> <a href="{% url 'category_detail' cat.id%}">{{cat.title}}</a></li>
+    {% endfor %}
+    </ul>
+    <hr>
+
+    <h1>salam</h1>
+    
+    
+</body>
+</html>
