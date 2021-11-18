@@ -17,6 +17,8 @@ urlpatterns = [
     # path('class_detail_post/',class_detail_post), #step 1 بدون پارامتر ورودی
     path('class_detail_post/<int:post_id>',class_detail_post),
     path('class_first_template/',class_first_template),
+    path('class_post_detail/<int:post_id>',class_post_detail),
+    path('class_post_list/',class_post_list),
     
 
 

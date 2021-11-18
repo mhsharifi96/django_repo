@@ -31,10 +31,7 @@ class Post(models.Model):
         (DEL,'delete'),
         (NOT,'notset'),
     ]
-    title = models.CharField('title post' ,max_length=255)
-
-        
-
+    title = models.CharField('title post' ,max_length=255) 
     shortdesc = models.CharField( 'short description',max_length=255,null=True,blank=True)
     desc = models.TextField()
     location_lat = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)

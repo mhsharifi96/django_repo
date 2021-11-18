@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list post</title>
+</head>
+<body>
+
+    {% for post in posts %}
+        <h1>{{post.title}}</h1>
+        <p>{{post.desc}}</p>
+        <small>{{post.created_on}}</small>
+        <h3>{{post.owner.uesrname}}</h3>
+        <p>
+            <a href="/blog/class_post_detail/{{post.id}}" >show detail</a>
+
+        </p>
+        <hr>
+    {% endfor %}
+
+    
+</body>
+</html>

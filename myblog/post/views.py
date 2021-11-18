@@ -40,11 +40,26 @@ def class_detail_post(request):
 
 def class_first_template(request):
 
-    print()
+    today = datetime.today()
+    title = "maktab coustom"
+    post = Post.objects.get(id=2)
+    # context = {'today':today,'title':title,'post':post}
+    return render(request,'maktab.html',{'post':post})
 
-    return render(request,'maktab.html')
+
+def class_post_detail(request,post_id):
+    # نمایش محتویات پست
+    
+    post = Post.objects.get(id=post_id)
+    
+    return render(request,'class_post_detail.html',{'post':post})
 
 
+def class_post_list(request):
+    posts = Post.objects.all().order_by('?')
+    for post in posts :
+        print(post)
+    return render(request,'class_post_list.html',{'posts':posts})
 
 # end class
 
