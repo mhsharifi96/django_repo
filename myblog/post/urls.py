@@ -10,7 +10,14 @@ urlpatterns = [
     path('detail/<int:id>/',detail_post,name='detail'),
     path('category/',category),
     path('category/<int:cat_id>/',category_detail,name='category_detail'),
-    path('base/',base_temp_view)
+    path('base/',base_temp_view),
+
+    # on class 
+    path('class_today/',class_today_time),
+    # path('class_detail_post/',class_detail_post), #step 1 بدون پارامتر ورودی
+    path('class_detail_post/<int:post_id>',class_detail_post),
+    path('class_first_template/',class_first_template),
+    
 
 
 ]

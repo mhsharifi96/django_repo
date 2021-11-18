@@ -6,6 +6,105 @@ from datetime import datetime
 # models
 from .models import  Post,Category
 
+#start class 
+
+# localhost:8000/blog/today/
+def class_today_time(request):
+    # a = 2+2
+    print(request)
+    print(request.path)
+    print(request.body)
+    print(request.method)
+    print(request.GET)
+    print(request.POST)
+    return  HttpResponse(f" today is : {datetime.today()}")
+
+
+
+def class_detail_post(request):
+
+    print(post_id)
+    # post id 2 
+    # id = 
+    try :
+        post  = Post.objects.get(id=post_id)
+        body = f"<html><body><h1>{post.title}</h1><p>{post.desc}</p></body></html>"
+    except Post.DoesNotExist :
+        body = "ارباب یافت نشد"
+        # return HttpResponseNotFound(body)
+    # title = "maktab sharif"
+    # desc = "desc sample"
+    return  HttpResponse(body)
+
+# django ->url ---->view ---->response
+
+def class_first_template(request):
+
+    print()
+
+    return render(request,'maktab.html')
+
+
+
+# end class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # نمایش تاریخ و ساعت امروز
 def today_date(request):
     #request :  https://docs.djangoproject.com/en/3.2/ref/request-response/
@@ -84,3 +183,10 @@ def category_detail(request,cat_id):
 
 def base_temp_view (request):
     return render (request,'base.html')
+
+
+
+
+
+
+
