@@ -33,15 +33,7 @@ urlpatterns = [
     path('about-view/', AboutView.as_view()),
     path('post-list-view/', PostListView.as_view()),
     path('post-detail-view/<int:pk>/', PostDetailView.as_view())
-    path('maktab-view/', MaktabView.as_view()),
-
-
-
-    path('maktab-list',ListPostView.as_view())
-
-
-
-    
+ 
     
 
 
