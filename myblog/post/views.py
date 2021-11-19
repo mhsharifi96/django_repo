@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,HttpResponseNotFound
 
-from .models import Post
 from datetime import datetime
 # models
 from .models import  Post,Category
@@ -119,6 +118,8 @@ class PostDetailView(DetailView):
 
 
 # end
+
+
 
 
 
