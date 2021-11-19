@@ -218,7 +218,7 @@ django view
 مثال ساده بریم حل کنیم 
 
 
-
+# 9 nov
 
 
 view function base
