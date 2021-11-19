@@ -1,0 +1,10 @@
+* {
+    direction : rtl;
+    text-align:right;
+}
+
+.carousel-inner .carousel-item img {
+ 
+    height: 50vh;
+    min-width: auto;
+  }

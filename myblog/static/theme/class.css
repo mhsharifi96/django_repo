@@ -1,0 +1,78 @@
+@font-face{
+    font-family: blogFont;
+    src:url('fonts/vazir.ttf');
+  }
+  
+  * {
+    font-family: blogFont;
+  }
+  
+ 
+ body {
+     direction : rtl;
+     text-align: right;
+     margin : 0px;
+ }
+
+.header {
+    text-align: center;
+    background: rgb(182, 144, 218);
+    font-size : 20px;
+    padding : 25px;
+}
+
+.navbar {
+    background : #f1f1f1
+}
+
+.navbar nav {
+    padding : 10px;
+}
+
+.navbar nav a {
+    margin : 0 10px;
+}
+
+.row { 
+    display : flex;
+}
+
+.column {
+    min-height: 200px;
+    background : #f1f1f1;
+    display : flex;
+    flex-direction : column;
+}
+
+
+.side {
+    flex :1;
+    background :#f6f2d4;
+}
+
+.column.middle {
+    flex : 2;
+}
+
+.side img { 
+    width : 100%;
+    height: 100px;
+}
+
+
+
+.footer {
+    text-align: center;
+    padding: 5px;
+    background: lightblue;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width : 600px){
+    .row {
+        flex-direction: column;
+        -webkit-flex-direction : column;
+    }
+}
