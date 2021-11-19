@@ -218,3 +218,18 @@ django view
 مثال ساده بریم حل کنیم 
 
 
+
+
+
+view function base
+view class base (temp/list/detail)
+static 
+template (block /if /with/for/ object_list(listview) ,filter (e.x : {{update_on | date}}))
+url
+dir template / static
+add theme
+simple form 
+
+slug ---> slugfy
+media
+
