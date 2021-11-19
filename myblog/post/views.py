@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,HttpResponseNotFound
 
 from .models import Post
@@ -21,11 +21,12 @@ def class_today_time(request):
 
 
 
-def class_detail_post(request):
+def class_detail_post(request,post_id):
 
     print(post_id)
     # post id 2 
     # id = 
+    # post = get_object_or_404(Post,id=post_id)
     try :
         post  = Post.objects.get(id=post_id)
         body = f"<html><body><h1>{post.title}</h1><p>{post.desc}</p></body></html>"

@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import *
 from django.views.generic import TemplateView
-# app_name = 'post'
+app_name = 'post'
 urlpatterns = [
     
     path('',index,name='index'),

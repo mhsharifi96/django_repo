@@ -1,33 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>list post</title>
-</head>
-<body>
+{% extends "class_base.html" %}
+
+{% block title %}
+    post list ha :)
+{% endblock title %}
+
+{% block content %}
 
     {% for post in posts %}
         <h1>{{post.title}}</h1>
         <p>{{post.desc}}</p>
         <small>{{post.created_on | date}}</small>
-        <h3>{{post.owner.uesrname}}</h3>
+        <h3>{{post.owner.email}}</h3>
 
         <p>
             {% comment %} <a href="/blog/class_post_detail/{{post.id}}" >show detail</a> {% endcomment %}
-            <a href="{% url 'class_detail' post.id %}" >show detail</a>
+            <a href="{% url 'post:class_detail' post.id %}" >show detail</a>
 
         </p>
-        
-        {% for tag in post.tag.all %}
-            {{tag.title}}
+        {% for t in post.tag.all %}
+            <p>{{t.title}}</p>
         {% endfor %}
+        
+        
+       
 
         {% comment %}template: https://docs.djangoproject.com/en/3.2/topics/templates/ {% endcomment %}
         {% comment %} filter : https://docs.djangoproject.com/en/3.2/ref/templates/builtins/#ref-templates-builtins-filters {% endcomment %}
         <hr>
     {% endfor %}
+{% endblock content %}
+
 
     
-</body>
-</html>
