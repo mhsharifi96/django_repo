@@ -35,5 +35,5 @@ class MainPageView(ListView):
 
 
 class PostDetailView(DetailView):
-    # model = Post
+    model = Post
     template_name = "maktab60/detail.html" 
