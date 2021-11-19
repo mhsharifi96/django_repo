@@ -10,12 +10,21 @@
     {% for post in posts %}
         <h1>{{post.title}}</h1>
         <p>{{post.desc}}</p>
-        <small>{{post.created_on}}</small>
+        <small>{{post.created_on | date}}</small>
         <h3>{{post.owner.uesrname}}</h3>
+
         <p>
-            <a href="/blog/class_post_detail/{{post.id}}" >show detail</a>
+            {% comment %} <a href="/blog/class_post_detail/{{post.id}}" >show detail</a> {% endcomment %}
+            <a href="{% url 'class_detail' post.id %}" >show detail</a>
 
         </p>
+        
+        {% for tag in post.tag.all %}
+            {{tag.title}}
+        {% endfor %}
+
+        {% comment %}template: https://docs.djangoproject.com/en/3.2/topics/templates/ {% endcomment %}
+        {% comment %} filter : https://docs.djangoproject.com/en/3.2/ref/templates/builtins/#ref-templates-builtins-filters {% endcomment %}
         <hr>
     {% endfor %}
 

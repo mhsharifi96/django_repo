@@ -1,0 +1,18 @@
+{% extends "theme.html" %}
+
+{% block content %}
+
+{% comment %} this is work!!!!!!!!!! {% endcomment %}
+
+    {% for post in object_list  %}
+        {{post.title}} <br>
+    {% endfor %}
+
+    <hr>
+
+    {% for cat in category_list %}
+        {{cat.title}} <br>
+    {% endfor %}
+
+{% endblock content %}
+

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseNotFound
 
 from .models import Post
@@ -64,7 +64,59 @@ def class_post_list(request):
 # end class
 
 
+# start 19 nov
+def same_template_name(request):
+    return render(request,'new/same_name.html')
 
+
+def show_theme(request):
+    # note part3 front --->static
+    return render(request,'new/first_page.html')
+    # return render(request,'new/second_page.html')
+
+
+def simple_form(request):
+    print(request.body)
+    print(request.method)
+    print(request.POST)
+    message = ""
+    if(request.method =="POST"):
+        print(request.POST['email'])
+        if (request.POST['email'] == 'virux'):
+            message = {'text':"اجازه ثبت نام موجود نیست", 'css_class':'text-danger'}
+        else : 
+            message = {'text':"اوکی داداش",'css_class':"text-primary"}
+        # if need query u can run it 
+        # e.x : user.objects.create(...)
+        # return redirect('index')
+    
+    return render(request,'new/simple_form.html',{'message':message})
+
+
+## class view###
+from django.views.generic import TemplateView,ListView,DetailView
+
+class AboutView(TemplateView):
+    # more : https://docs.djangoproject.com/en/3.2/topics/class-based-views/#subclassing-generic-views
+    template_name = "new/about.html"
+
+class PostListView(ListView):
+    # https://docs.djangoproject.com/en/3.2/topics/class-based-views/generic-display/
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        
+        context = super().get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        return context
+
+class PostDetailView(DetailView):
+    #more  https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-display/  
+    model= Post
+
+
+
+# end
 
 
 
