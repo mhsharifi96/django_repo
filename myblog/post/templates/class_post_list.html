@@ -1,4 +1,9 @@
 {% extends "class_base.html" %}
+{% load static %}
+
+{% block linkCss %}
+  <link rel="stylesheet" href="{% static 'main.css'%}">
+{% endblock linkCss %}
 
 {% block title %}
     post list ha :)

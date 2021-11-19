@@ -61,6 +61,7 @@ def class_post_list(request):
     for post in posts :
         print(post)
     return render(request,'class_post_list.html',{'posts':posts})
+    # return render(request,'list_post_main_temp.html',{'posts':posts})
 
 # end class
 
