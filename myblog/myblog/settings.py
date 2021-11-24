@@ -125,9 +125,18 @@ STATICFILES_DIRS  = [
     BASE_DIR / 'static'
 ]
 
-
+MEDIA_ROOT =  str(BASE_DIR /'media')
 MEDIA_URL = '/media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# https://stackoverflow.com/questions/25720361/how-to-use-django-admin-py-makemessages-all/25721276
+# python manage.py  makemessages -l fa
+
+LOCALE_PATHS = [
+     str(BASE_DIR /'locale')
+]
+

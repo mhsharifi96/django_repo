@@ -233,3 +233,13 @@ simple form
 slug ---> slugfy
 media
 
+
+
+# 24 november
+
+media 
+steps : 
+  add media MEDIA_ROOT and MEDIA_URL
+  add path to main urls.py
+
+forms :

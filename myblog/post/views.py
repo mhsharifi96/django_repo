@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse,HttpResponseNotFound
-
+from django.urls import reverse
 from datetime import datetime
 # models
-from .models import  Post,Category
+from .models import  Post,Category,Tag
 
 #start class 
 
@@ -121,60 +121,6 @@ class PostDetailView(DetailView):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # نمایش تاریخ و ساعت امروز
 def today_date(request):
     #request :  https://docs.djangoproject.com/en/3.2/ref/request-response/
@@ -258,5 +204,119 @@ def base_temp_view (request):
 
 
 
+# start form
 
 
+from .forms import SimpleForm,SimpleModelForm,LoginForm,UserFormModel,NewPasswordForm
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
+
+
+def get_name(request):
+    
+    form = SimpleForm()
+
+    if request.method == "POST":
+
+        form = SimpleForm(request.POST)
+        if form.is_valid():
+            print(form)
+            print(form.cleaned_data)
+            print('name',form.cleaned_data['name'])
+            # newtag = Tag()
+            # newtag.title =  form.cleaned_data['name']
+            form.save()
+        # else :
+        #     print(form.cleaned_data)
+            # 
+    return render(request,'forms/name_form.html',{
+        'form':form
+    })
+
+
+def category_form (request):
+
+
+    form = SimpleModelForm(request.POST or None)
+    if form.is_valid():
+        print(form.cleaned_data)
+        form.save()
+        return redirect(reverse('post:about_page'))
+    return render(request,'forms/category_form.html',{
+        'form':form
+    })
+
+
+
+def category_form_edit(request):
+
+    category = Category.objects.get(id=1)
+    form = SimpleModelForm(request.POST or None,instance=category)
+    if form.is_valid():
+        print(form.cleaned_data)
+        form.save()
+        return redirect(reverse('post:about_page'))
+
+    return render(request,'forms/category_form.html',{
+        'form':form
+    })
+
+
+
+
+#end form
+
+
+def mylogin(request):
+    #refrence :  https://docs.djangoproject.com/en/3.2/topics/auth/default/#how-to-log-a-user-in
+    form = LoginForm()
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            user = authenticate(request,username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            if user is not None:
+                print(user)
+                login(request,user)
+                return redirect(reverse('post:sec'))
+            else :
+                print('not found user')
+    return render(request,'forms/login.html',{'form':form})
+
+
+
+@login_required(login_url='/blog/login')
+def security_page(request):
+
+    return HttpResponse('this page need to login :|')
+
+from django.contrib.auth.models import User
+def myRegister(request):
+    form = UserFormModel(None or request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            user = User.objects.create_user(form.cleaned_data['username'],form.cleaned_data['email'],form.cleaned_data['password'])
+            print('new user register is :',user)
+    
+    return render(request,'forms/register.html',{'form':form})
+
+
+@login_required(login_url='/blog/login')
+def new_password(request):
+    user = request.user
+    print(user.is_authenticated)
+    print(user.check_password('12345555'))
+    form = NewPasswordForm(None or request.POST)
+    print(form)
+    if  user.is_authenticated : 
+        if request.method == "POST":
+            if form.is_valid():
+                if user.check_password(form.cleaned_data['password']):
+                    user.set_password(form.cleaned_data['password_1'])
+                    user.save()
+                    # return HttpResponse('password changed ')
+                
+
+    return render(request,'forms/new_password.html',{'form':form})

@@ -23,16 +23,21 @@ urlpatterns = [
     path('same_template_name/',same_template_name),
     path('show_theme/',show_theme),
     path('simple_form/',simple_form),
-
-
-
-
-
     # class view
-    path('about/', TemplateView.as_view(template_name="new/about.html")),
+    path('about/', TemplateView.as_view(template_name="new/about.html"),name="about_page"),
     path('about-view/', AboutView.as_view()),
     path('post-list-view/', PostListView.as_view()),
-    path('post-detail-view/<int:pk>/', PostDetailView.as_view())
+    path('post-detail-view/<int:pk>/', PostDetailView.as_view()),
+    # start form django and custom auth
+    path('get_name/', get_name),
+    
+    path('category_form/', category_form),
+    path('category_form_edit/', category_form_edit),
+    path('login/', mylogin ,name="login"),
+    path('register/', myRegister ,name="register"),
+    path('sec/', security_page ,name="sec"),
+    path('new-password/', new_password ,name="new-password"),
+    
  
     
 
