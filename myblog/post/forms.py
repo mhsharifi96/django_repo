@@ -1,5 +1,5 @@
 from django import forms
-from .models import  Tag,Category,Post
+from .models import  Tag,Category,Post,SimplePost
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
@@ -83,3 +83,10 @@ class NewPasswordForm(forms.Form):
     #         )
 
     # refrence : https://docs.djangoproject.com/en/3.2/ref/forms/validation/#cleaning-a-specific-field-attribute
+
+
+
+class SimplePostModelForm(forms.ModelForm):
+    class Meta : 
+        model = SimplePost
+        fields = "__all__"

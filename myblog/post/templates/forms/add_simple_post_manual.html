@@ -1,0 +1,38 @@
+
+
+{% extends "theme.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="col-md-12 my-3">
+        <form enctype="multipart/form-data" action="{% url 'post:simple-post' %}" method="post">
+        {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="fieldWrapper">
+                {{ form.title.errors }}
+                <label for="{{ form.title.id_for_label }}"> title:</label>
+                {{ form.title }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.description.errors }}
+                <label for="{{ form.description.id_for_label }}">Your description:</label>
+                {{ form.description }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.category.errors }}
+                <label for="{{ form.category.id_for_label }}">Your category :</label>
+                {{ form.category }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.image.errors }}
+                <label for="{{ form.image.id_for_label }}">your image</label>
+                {{ form.image }}
+            </div>
+            <input type="submit" value="ارسال کن بره">
+        </form>
+    </div>
+
+</div>
+
+{% endblock content %}

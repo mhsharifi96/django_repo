@@ -205,9 +205,7 @@ def base_temp_view (request):
 
 
 # start form
-
-
-from .forms import SimpleForm,SimpleModelForm,LoginForm,UserFormModel,NewPasswordForm
+from .forms import SimpleForm,SimpleModelForm,LoginForm,UserFormModel,NewPasswordForm,SimplePostModelForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -320,3 +318,25 @@ def new_password(request):
                 
 
     return render(request,'forms/new_password.html',{'form':form})
+
+
+
+
+def simple_post(request):
+    # refrence : https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/#handling-uploaded-files-with-a-model
+    if request.method == 'POST':
+        print(request.FILES)
+        form = SimplePostModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            # file is saved
+            form.save()
+            
+    else:
+        form = SimplePostModelForm()
+    # return render(request,'forms/add_simple_post.html',{'form':form})
+    return render(request,'forms/add_simple_post_manual.html',{'form':form})
+
+
+
+# add css class to forms    
+#refrence : https://stackoverflow.com/questions/401025/define-css-class-in-django-forms

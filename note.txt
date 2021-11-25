@@ -241,5 +241,18 @@ media
 steps : 
   add media MEDIA_ROOT and MEDIA_URL
   add path to main urls.py
+  add below code on settings.py
+  MEDIA_ROOT =  str(BASE_DIR /'media')
+  MEDIA_URL = '/media/'
 
 forms :
+  forms.form
+  forms.ModelForm
+  template form
+  def clean on form
+
+# authenticate
+  # simple custom login
+  # simple custom register 
+  # simple custom set new password
+

@@ -37,6 +37,7 @@ urlpatterns = [
     path('register/', myRegister ,name="register"),
     path('sec/', security_page ,name="sec"),
     path('new-password/', new_password ,name="new-password"),
+    path('simple-post/', simple_post ,name="simple-post"),
     
  
     

@@ -1,0 +1,16 @@
+{% extends "theme.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="col-md-12 my-3">
+        <form enctype="multipart/form-data" action="{% url 'post:simple-post' %}" method="post">
+        {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="ارسال کن بره">
+        </form>
+    </div>
+
+</div>
+
+{% endblock content %}
