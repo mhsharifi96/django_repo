@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.urls import reverse
 from django.views.generic import TemplateView,ListView,DetailView
 from django.http import HttpResponse
 
@@ -64,3 +65,29 @@ def simple_form(request):
 
 
 
+# form 
+
+from .forms import SimpleForm,TagForm
+def get_name(request):
+    form = SimpleForm()
+    if request.method == "POST":
+        form = SimpleForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data['name'])
+            print('form valid ')
+            # model save 
+            
+    
+    return render(request,'maktab60/forms/name_form.html',{'form':form})
+
+def add_tag_form (request):
+
+    form = TagForm(None or request.POST)
+    # form = SimpleModelForm(request.POST or None)
+    if form.is_valid():
+        tag = Tag.objects.create(title=form.cleaned_data['title'])
+        return redirect(reverse('post:about_page'))
+
+    return render(request,'maktab60/forms/tag_form.html',{
+        'form':form
+    })

@@ -57,7 +57,11 @@
           
             <div class="col-md-3 my-2">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{post.image.url}}" alt="Card image cap">
+                {% if post.image  %}
+                  <img class="card-img-top" src="{{post.image.url}}" alt="Card image cap">
+                {% else %}
+                  <img class="card-img-top" src="{% static 'theme/img/feragh.jpg'%}" alt="Card image cap">
+                {% endif %}
                 
                 <div class="card-body">
                 <h5 class="card-title">{{post.title}}</h5>
