@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.urls import reverse
 from django.views.generic import TemplateView,ListView,DetailView
 from django.http import HttpResponse
@@ -67,7 +67,8 @@ def simple_form(request):
 
 # form 
 
-from .forms import SimpleForm,TagForm
+from .forms import SimpleForm,TagForm,TagModelForm,TagDeleteModelForm
+
 def get_name(request):
     form = SimpleForm()
     if request.method == "POST":
@@ -82,12 +83,62 @@ def get_name(request):
 
 def add_tag_form (request):
 
-    form = TagForm(None or request.POST)
-    # form = SimpleModelForm(request.POST or None)
-    if form.is_valid():
-        tag = Tag.objects.create(title=form.cleaned_data['title'])
-        return redirect(reverse('post:about_page'))
+    # form = TagForm()
+    form = TagModelForm()
+    if request.method == "POST":
+        form = TagModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('tag-list')) #app_name:name_url
 
     return render(request,'maktab60/forms/tag_form.html',{
         'form':form
+        
+
     })
+
+
+# باید اول اون چیزی که میخواییم اپدیت کنیم از دیتابیس پیدا کنیم
+def edit_tag_form (request,tag_id):
+    tag = get_object_or_404(Tag,id=tag_id)
+    form = TagModelForm(instance=tag)  #validate
+
+    if request.method == "POST":
+        form =TagModelForm(request.POST,instance=tag)  #validate
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('tag-list')) #app_name:name_url
+
+    return render(request,'maktab60/forms/edit_tag_form.html',{'form':form})
+
+
+def delete_tag_form(request,tag_id):
+    
+    tag = get_object_or_404(Tag,id=tag_id)
+    
+    form = TagDeleteModelForm(instance=tag)  #validate
+    if request.method == "POST":
+        tag.delete()
+        print('delete')
+        return redirect(reverse('tag-list')) #reverse('app_name:name_url')
+
+
+    return render(request,'maktab60/forms/delete_tag_form.html',{'form':form,'tag':tag})
+
+
+def delete_tag_without_form(request,tag_id):
+    
+    tag = get_object_or_404(Tag,id=tag_id)    
+    tag.delete()
+    print('delete')
+    return redirect(reverse('tag-list')) #reverse('app_name:name_url')
+
+
+    
+
+
+
+
+class TagListView(ListView):
+    model = Tag
+    template_name = "maktab60/tag_list.html"

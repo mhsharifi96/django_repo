@@ -1,5 +1,5 @@
 from django import forms
-from post.models import Tag
+from post.models import Tag,Post,Category
 
 
 class SimpleForm(forms.Form):
@@ -14,4 +14,24 @@ class SimpleForm(forms.Form):
 
 
 class TagForm (forms.Form):
-    title = forms.CharField(max_length=255,min_length=3,label="تگ" ,)
+    title = forms.CharField(max_length=255,min_length=3,label="تگ",error_messages={'required':'وارد کردن تگ ضروری است'} )
+
+    def save(self):
+        print(self.cleaned_data)
+        Tag.objects.create(title=self.cleaned_data['title'])
+
+
+class TagModelForm(forms.ModelForm):
+
+    class Meta : 
+        model = Tag
+        # fields = "__all__"
+        fields = ['title']
+
+
+class TagDeleteModelForm(forms.ModelForm):
+    class Meta : 
+        model = Tag
+        fields = []
+
+

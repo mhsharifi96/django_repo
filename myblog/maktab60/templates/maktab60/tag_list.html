@@ -1,0 +1,26 @@
+{% extends "theme.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-12 my-3">
+            <div class="col-md-12">
+                <a class="btn btn-sm btn-primary" href="{% url 'tag-mk' %}">ثبت تگ جدید</a>
+            </div>
+            {% for tag in object_list  %}
+               <p>             
+                <a href="{% url 'edit-tag-mk' tag_id=tag.id %}">
+                    <b>{{tag.title}}</b>
+                </a>
+                <a class="btn btn-sm btn-danger" href="{% url 'delete-tag-direct' tag_id=tag.id %}">
+                    <small>حذف</small>
+                </a>
+                <a class="btn btn-sm btn-danger" href="{% url 'delete-tag-mk' tag_id=tag.id %}">
+                    <small>حذف با فرم</small>
+                </a>
+                </p>
+            
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}
