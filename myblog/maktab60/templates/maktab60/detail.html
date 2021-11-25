@@ -4,9 +4,20 @@
 
 {% block content %}
     <div class="container">
-        <h1> {{post.title}}</h1>
-        <p>{{post.desc}}</p>
+        <div class="col-md-12">
+            <h1> {{post.title}}</h1>
+            <p>{{post.desc}}</p>
+            <hr>
+        </div>
+        <div class="col-12">
+            <form action="{% url 'post-detail' id=post.id %}" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="افزودن نظر">
+            </form>
+        </div>
     </div>
+
 
     <br>
     

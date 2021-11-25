@@ -1,0 +1,15 @@
+{% extends "theme.html" %}
+
+{% block content %}
+    <div class="container">
+        صفحه ثبت نام برای شما برای شما
+        <div class="col-md-12 my-3">
+            <form action="{% url 'register-mk' %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="register">
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

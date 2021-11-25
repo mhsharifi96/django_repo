@@ -2,6 +2,11 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.urls import reverse
 from django.views.generic import TemplateView,ListView,DetailView
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate,login
+from django.contrib.auth.models import User
+from .forms import SimpleForm,TagForm,TagModelForm,TagDeleteModelForm,CommentModelForm,LoginForm,UserRegisterFormModel,SetNewPasswordForm
+
 
 # Create your views here.
 from post.models import Post,Category,Tag
@@ -12,7 +17,16 @@ from post.models import Post,Category,Tag
 def postDetail(request,id):
     # url add nashode
     post = Post.objects.get(id=id) #try except OR get_object_or 404
-    return render(request,'maktab60/detail.html',{'post':post})
+    form = CommentModelForm()
+    if request.method == "POST":
+        form = CommentModelForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            # return redirect(reverse('post-detail',id=id)) #
+
+    return render(request,'maktab60/detail.html',{'post':post,'form':form})
 
 # نمایش لیست پست ها
 def postList(request):
@@ -67,7 +81,6 @@ def simple_form(request):
 
 # form 
 
-from .forms import SimpleForm,TagForm,TagModelForm,TagDeleteModelForm
 
 def get_name(request):
     form = SimpleForm()
@@ -81,10 +94,12 @@ def get_name(request):
     
     return render(request,'maktab60/forms/name_form.html',{'form':form})
 
+@login_required(login_url='/maktab60/login')
 def add_tag_form (request):
 
     # form = TagForm()
     form = TagModelForm()
+    print(request.user.email)
     if request.method == "POST":
         form = TagModelForm(request.POST)
         if form.is_valid():
@@ -134,7 +149,76 @@ def delete_tag_without_form(request,tag_id):
     return redirect(reverse('tag-list')) #reverse('app_name:name_url')
 
 
+
+def add_comment(request):
+    #برای پست اولی میخواهیم کامتی بگذاریم
+    post = Post.objects.get(id=1)
+    form = CommentModelForm()
+    if request.method == "POST":
+        form =CommentModelForm(request.POST)  #validate
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post 
+            comment.save()
+            
+
+            return HttpResponse('this comment saved')
+    return render(request,'maktab60/forms/add_comment.html',{'form':form,'post':post})
+
+
+# def detail_post
+#  get post and comment
+#  form comment
+# render page
+
+
+
+
+def login_maktab(request):
+    form = LoginForm()
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username= form.cleaned_data.get('username'),password= form.cleaned_data.get('password'))
+            if user is not None :
+                login(request,user)
+                
+                return redirect(reverse('tag-mk')) #
+            
+            print('userrrrrrrrrrrrrrr :',user)
+
+            # cleaned_data
+    return render(request,'maktab60/forms/login.html' ,{'form':form})
+
+
+def register_maktab(request):
+    form = UserRegisterFormModel(None or request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            user = User.objects.create_user(form.cleaned_data['username'],form.cleaned_data['email'],form.cleaned_data['password'])
+            print('new user register is :',user)
+            return HttpResponse('user register :)')
     
+    return render(request,'maktab60/forms/register.html',{'form':form})
+
+@login_required(login_url='/maktab60/login')
+def set_new_password(request):
+    form = SetNewPasswordForm()
+    if request.method == "POST":
+        form = SetNewPasswordForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            print(user)
+            print(user.check_password(form.cleaned_data.get('password')))
+            if user.check_password(form.cleaned_data.get('password')):
+                password=user.set_password(form.cleaned_data.get('password1'))
+                print('password:',password)
+                user.save()
+
+            print('user request : ',request.user)
+        
+    return render(request,'maktab60/forms/set_new_password.html',{'form':form})
+
 
 
 

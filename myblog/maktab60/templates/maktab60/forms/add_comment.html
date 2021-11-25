@@ -1,0 +1,16 @@
+{% extends "theme.html" %}
+
+{% block content %}
+    <div class="container">
+            پست مورد نظری   
+            {{post.title}}
+        <div class="col-md-12 my-3">
+            <form action="{% url 'add-comment' %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="بزن بریم">
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

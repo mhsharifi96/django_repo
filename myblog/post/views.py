@@ -304,15 +304,15 @@ def myRegister(request):
 @login_required(login_url='/blog/login')
 def new_password(request):
     user = request.user
-    print(user.is_authenticated)
-    print(user.check_password('12345555'))
+    
+    
     form = NewPasswordForm(None or request.POST)
     print(form)
     if  user.is_authenticated : 
         if request.method == "POST":
             if form.is_valid():
                 if user.check_password(form.cleaned_data['password']):
-                    user.set_password(form.cleaned_data['password_1'])
+                    user.set_password(form.cleaned_data['password1'])
                     user.save()
                     # return HttpResponse('password changed ')
                 

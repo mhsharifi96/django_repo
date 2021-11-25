@@ -1,6 +1,6 @@
 from django import forms
-from post.models import Tag,Post,Category
-
+from post.models import Tag,Post,Category,Comment
+from django.contrib.auth.models import User
 
 class SimpleForm(forms.Form):
     name = forms.CharField(max_length=255,min_length=5,label="نام" ,help_text="توضیح اضافه")
@@ -34,4 +34,64 @@ class TagDeleteModelForm(forms.ModelForm):
         model = Tag
         fields = []
 
+class CommentModelForm(forms.ModelForm):
+
+    class Meta : 
+        model = Comment
+        fields = ['title','desc']
+        labels ={
+            'title': 'عنوان',
+            'desc' : 'توضیحات'
+        }
+        error_messages = {
+            'title': {
+                'max_length': "This writer's name is too long.",
+                'required': "حتما وارد کنید",
+            },
+        }
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=255,min_length=5,label="نام کاربری" )
+    password =  forms.CharField(widget=forms.PasswordInput)
+
+
+
+class UserRegisterFormModel(forms.ModelForm):
+
+
+    class Meta :
+        model = User
+        fields = ['username','email','password']
+
+from django.core.exceptions import ValidationError
+
+class SetNewPasswordForm(forms.Form):
+    password =  forms.CharField(widget=forms.PasswordInput)
+    password1 =  forms.CharField(widget=forms.PasswordInput)
+    password2 =  forms.CharField(widget=forms.PasswordInput)
+
+    # def clean_password2(self):
+    #     password2 = self.cleaned_data['password2']
+    #     password1 = self.cleaned_data['password1']
+    #     if password1 != password2:
+    #         raise ValidationError("password1  == password2 ")
+
+    #     # Always return a value to use as the new cleaned data, even if
+    #     # this method didn't change it.
+    #     return password2
+    
+    def clean(self):    
+        cleaned_data = super().clean()
+        password1 =  cleaned_data.get("password1")
+        password2 =  cleaned_data.get("password2")
+
+        if password1 != password2:
+                raise ValidationError(
+                   "password1 and password2  not equal"
+                )
+        if password1 == '1234':
+            raise ValidationError(
+                   "password1  have not 1234"
+                )
 
