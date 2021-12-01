@@ -256,3 +256,70 @@ forms :
   # simple custom register 
   # simple custom set new password
 
+#start
+# 2 december
+
+1.django message 
+https://docs.djangoproject.com/en/3.2/ref/contrib/messages/
+
+####
+https://docs.djangoproject.com/en/3.2/topics/class-based-views/generic-display/
+https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-display/#django.views.generic.detail.DetailView
+2.ListView
+  2.1 get_context_data
+  2.2 get_queryset
+
+3.DetailView
+  3.1 get_context_data
+  3.2 get_queryset
+  3.3 get_object
+
+4. View
+  https://docs.djangoproject.com/en/3.2/topics/class-based-views/intro/
+
+5.Login Required ClassView  
+  https://docs.djangoproject.com/en/3.2/topics/auth/default/#django.contrib.auth.mixins.LoginRequiredMixin
+
+5. Custom Uesr
+  https://testdriven.io/blog/django-custom-user-model/
+
+6. Form  Css class 
+
+
+#end
+
+
+def login_maktab(request):
+    print('next  to ',request.GET)
+    form = LoginForm()
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username= form.cleaned_data.get('username'),password= form.cleaned_data.get('password'))
+            if user is not None :
+                login(request,user)
+                print('next  to ',request.GET.get('next'))
+                print('next  to ',request.GET)
+                print('next  to ',request.POST)
+                print('next  to ',request.path)
+                print('next  to ',request.method)
+
+                # return redirect(reverse('tag-mk')) #
+                return redirect(request.GET.get('next')) #
+            
+            print('user :',user)
+
+            # cleaned_data
+    return render(request,'maktab60/forms/login.html' ,{'form':form})
+
+
+ {% if request.GET %}
+        
+            <form action="{% url 'login-mk' %}?next={{request.GET.next}} " method="post">
+        {% else %}
+            <form action="{% url 'login-mk' %} " method="post">
+        {% endif %}
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="login">
+            </form>
