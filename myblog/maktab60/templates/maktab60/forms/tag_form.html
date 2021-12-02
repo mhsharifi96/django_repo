@@ -3,9 +3,16 @@
 {% block content %}
     <div class="container">
         <div class="col-md-12 my-3">
-            <form action="{% url 'tag-mk' %}" method="post">
+            <form action="{% url 'add-tag-view' %}" method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {% comment %} {{ form.as_p }} {% endcomment %}
+
+                <div class="fieldWrapper">
+                    {{ form.title.errors }}
+                    <label for="{{ form.title.id_for_label }}"> title:</label>
+                    {{ form.title }}
+                </div>
+
                 <input type="submit" value="بزن بریم">
             </form>
         </div>

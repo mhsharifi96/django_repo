@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
 from .forms import SimpleForm,TagForm,TagModelForm,TagDeleteModelForm,CommentModelForm,LoginForm,UserRegisterFormModel,SetNewPasswordForm
 from django.contrib import messages
+from django.views import View
 
 
 # Create your views here.
@@ -112,11 +113,25 @@ def add_tag_form (request):
             return redirect(reverse('tag-list')) #app_name:name_url
 
     return render(request,'maktab60/forms/tag_form.html',{
-        'form':form,
-        
-        
-
+        'form':form,    
     })
+
+class AddTagView(View):
+    # method get
+    form = TagModelForm
+    def get(self,request,*args,**kwargs):
+        # print(kwargs)
+        return render(request,'maktab60/forms/tag_form.html',{'form':self.form,    })
+
+    def post(self,request,*args,**kwargs):
+        
+        post_form = self.form(request.POST)
+        if post_form.is_valid():
+            post_form.save()
+            messages.add_message(request, messages.ERROR, f'تگ مورد نظر ذخیره گردید.',extra_tags="danger")
+            
+            return redirect(reverse('tag-list')) #app_name:name_url
+
 
 
 # باید اول اون چیزی که میخواییم اپدیت کنیم از دیتابیس پیدا کنیم
@@ -168,7 +183,7 @@ def add_comment(request):
             comment.save()
             
 
-            return HttpResponse('this comment saved')
+            # return HttpResponse('this comment saved')
     return render(request,'maktab60/forms/add_comment.html',{'form':form,'post':post})
 
 
@@ -231,10 +246,9 @@ def set_new_password(request):
 
 class TagListView(ListView):
     # model = Tag
-    queryset = Tag.objects.all().filter(title__contains="a")
+    # queryset = Tag.objects.all().filter(title__contains="a")
+    queryset = Tag.objects.all()
     template_name = "maktab60/tag_list.html"
-   
-
         
     def get_context_data(self, **kwargs):
         

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'post',
-    'maktab60'
+    'maktab60',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

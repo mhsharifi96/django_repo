@@ -35,6 +35,9 @@ class TagDeleteModelForm(forms.ModelForm):
         fields = []
 
 class CommentModelForm(forms.ModelForm):
+    # def __init__(self, *args, **kwargs):
+    #     super(SampleClass, self).__init__(*args, **kwargs)
+    #     self.fields['title'].widget.attrs['class'] = 'my_class'
 
     class Meta : 
         model = Comment
