@@ -6,7 +6,7 @@ from .views import  *
 
 urlpatterns = [
     path('theme',ShowTemplate.as_view()),
-    path('',MainPageView.as_view()),
+    path('',MainPageView.as_view(), name="main-home"),
     path('detail/<int:id>/',postDetail , name='post-detail'),
     path('detail-view/<int:pk>/',PostDetailView.as_view()),
 

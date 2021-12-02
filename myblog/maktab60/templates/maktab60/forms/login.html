@@ -4,7 +4,15 @@
     <div class="container">
         صفحه لاگین برای شما
         <div class="col-md-12 my-3">
+            {% if request.GET.next %}
+            
+            <form action="{% url 'login-mk' %}?next={{request.GET.next}}" method="post">
+            
+            {% else %}
             <form action="{% url 'login-mk' %}" method="post">
+            {% endif %}
+            
+                <input type="hidden" name="next" value="{{request.GET.next}}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="login">

@@ -197,16 +197,23 @@ def add_comment(request):
 
 def login_maktab(request):
     form = LoginForm()
+    print('get : ', request.GET)
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(username= form.cleaned_data.get('username'),password= form.cleaned_data.get('password'))
             if user is not None :
                 login(request,user)
+                # print('get : ', request.GET)
+                # print('post:',request.POST)
+                # print(request.POST.get('next'))
                 
+                next = request.GET.get('next')
+                if next : 
+                    return redirect(request.GET.get('next')) #
                 return redirect(reverse('tag-mk')) #
             
-            print('userrrrrrrrrrrrrrr :',user)
+            
 
             # cleaned_data
     return render(request,'maktab60/forms/login.html' ,{'form':form})
