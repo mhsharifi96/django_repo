@@ -280,10 +280,19 @@ https://docs.djangoproject.com/en/3.2/ref/class-based-views/generic-display/#dja
 5.Login Required ClassView  
   https://docs.djangoproject.com/en/3.2/topics/auth/default/#django.contrib.auth.mixins.LoginRequiredMixin
 
-5. Custom Uesr
+5. Custom User
   https://testdriven.io/blog/django-custom-user-model/
 
 6. Form  Css class 
+  question : https://stackoverflow.com/questions/401025/define-css-class-in-django-forms
+  refrence : https://github.com/jazzband/django-widget-tweaks
+  sample : https://simpleisbetterthancomplex.com/2015/12/04/package-of-the-week-django-widget-tweaks.html
+
+    {{form.title}}
+    {{ form.title|add_class:"form-control" }}
+    {% render_field form.title class+="form-control sample" placeholder=form.title.label %}
+   
+
 
 
 #end
