@@ -21,6 +21,9 @@ urlpatterns = [
     path('login',login_maktab,name='login-mk'),
     path('register',register_maktab,name='register-mk'),
     path('new-password',set_new_password,name='new-pass-mk'),   
+    path('search',searchPageView.as_view(),name='search'),   
+    path('search1/<slug:slug>/<int:number>',searchPageView.as_view(),name='search1'),   
+    
 ]
 
 

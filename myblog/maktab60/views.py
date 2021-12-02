@@ -230,5 +230,35 @@ def set_new_password(request):
 
 
 class TagListView(ListView):
-    model = Tag
+    # model = Tag
+    queryset = Tag.objects.all().filter(title__contains="a")
     template_name = "maktab60/tag_list.html"
+   
+
+        
+    def get_context_data(self, **kwargs):
+        
+        context = super().get_context_data(**kwargs)
+        
+        context['category'] = Category.objects.all()
+        print(context)
+        
+        return context
+
+
+class searchPageView(ListView):
+    # model = Post   
+    #queryset
+    template_name = "maktab60/search.html"
+    context_object_name = 'posts' # object_list
+
+    def get_queryset(self):
+        # print('kwargs',self.kwargs)
+        
+        queryset = Post.objects.all()
+        
+        q = self.request.GET.get('q')
+        if q :
+            queryset = queryset.filter(title__contains= q)
+            
+        return queryset

@@ -56,6 +56,7 @@ def class_post_detail(request,post_id):
 
 
 def class_post_list(request):
+    print(request.method)  ##get
     posts = Post.objects.all().order_by('?')
     for post in posts :
         print(post)
