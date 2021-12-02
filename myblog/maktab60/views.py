@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
 from .forms import SimpleForm,TagForm,TagModelForm,TagDeleteModelForm,CommentModelForm,LoginForm,UserRegisterFormModel,SetNewPasswordForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -96,7 +97,7 @@ def get_name(request):
 
 @login_required(login_url='/maktab60/login')
 def add_tag_form (request):
-
+    my_message = ""
     # form = TagForm()
     form = TagModelForm()
     print(request.user.email)
@@ -104,10 +105,15 @@ def add_tag_form (request):
         form = TagModelForm(request.POST)
         if form.is_valid():
             form.save()
+            
+            messages.add_message(request, messages.ERROR, f'تگ مورد نظر ذخیره گردید.',extra_tags="danger")
+          
+
             return redirect(reverse('tag-list')) #app_name:name_url
 
     return render(request,'maktab60/forms/tag_form.html',{
-        'form':form
+        'form':form,
+        
         
 
     })
@@ -124,7 +130,7 @@ def edit_tag_form (request,tag_id):
             form.save()
             return redirect(reverse('tag-list')) #app_name:name_url
 
-    return render(request,'maktab60/forms/edit_tag_form.html',{'form':form})
+    return render(request,'maktab60/forms/edit_tag_form.html',{'form':form,'tag':tag})
 
 
 def delete_tag_form(request,tag_id):
