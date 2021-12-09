@@ -141,3 +141,38 @@ LOCALE_PATHS = [
      str(BASE_DIR /'locale')
 ]
 
+
+LOGGING ={
+    'version':1,
+    'loggers':{
+        'django':{
+            'level':'DEBUG',
+            'handlers':['file','file2'],
+        }
+    },
+    'handlers':{
+        'file':{
+            'level':'INFO',
+            'class': 'logging.FileHandler',
+            'filename':'./logs/debug5.log',
+            'formatter':'simpleRe',
+        },
+        'file2':{
+            'level':'ERROR',
+            'class': 'logging.FileHandler',
+            'filename':'./logs/error.log',
+            'formatter':'errorFormat',
+        }
+    },
+    'formatters':{
+        'simpleRe': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'errorFormat': {
+            'format': '{asctime}  {message}',
+            'style': '{',
+        }
+
+    }
+}
