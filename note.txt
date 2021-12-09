@@ -331,4 +331,64 @@ def login_maktab(request):
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="login">
+                
+                
             </form>
+    
+ 
+ 
+ 
+ # start 
+ # 9 december
+ https://programmer.help/blogs/django-log-output-to-log-file.html
+ 
+ import logging
+logger = logging.getLogger('django
+ def testlog(request):
+    test = Category.objects.all()
+    print('test')
+    logger.error('Something went wrong!')
+    print('test ::::::',test)
+    return HttpResponse('yhes')
+ 
+LOGGING ={
+    'version':1,
+    'disable_existing_loggers': True,
+
+    'loggers':{
+        'django':{
+            'handlers':['file'],
+            'level':'DEBUG'
+        },
+        'django.db.backends':{
+            'handlers':['file2'],
+            'level':'DEBUG'
+        }
+    },
+    'handlers':{
+        'file':{
+            'level':'INFO',
+            'class': 'logging.FileHandler',
+            'filename':'./logs/debug5.log',
+            'formatter':'simpleRe',
+        },
+        'file2':{
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logs/debug6.log',
+            'formatter':'simpleRe2',
+        }
+    },
+    'formatters':{
+        'simpleRe': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simpleRe2': {
+            'format': '{duration} {sql} {params} ',
+            'style': '{',
+        }
+
+    }
+}
+# end
