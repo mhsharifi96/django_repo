@@ -102,7 +102,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = ['polls.mybackends.EmailModelBackend'] 
+AUTHENTICATION_BACKENDS = ['polls.mybackends.EmailModelBackend'] +['django.contrib.auth.backends.ModelBackend']
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

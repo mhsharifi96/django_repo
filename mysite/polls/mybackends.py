@@ -12,10 +12,9 @@ class EmailModelBackend(BaseBackend):
         print(username)
         if '@' in username:
             kwargs = {'email': username}
-        else:
-             kwargs = {'username': username}
+       
         try:
-            user = User.objects.get(**kwargs)
+            user = User.objects.get(email=username)
             
             if user.check_password(password) is True:
                 return user
