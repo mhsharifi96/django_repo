@@ -5,16 +5,17 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import BaseBackend
 User = get_user_model()
 print(User)
-class EmailModelBackend(BaseBackend):
+class EmailUserNameModelBackend(BaseBackend):
     print('here')
     def authenticate(self,request, username=None, password=None, **kwargs):
         
         print(username)
         if '@' in username:
             kwargs = {'email': username}
-       
+        else : 
+            kwargs = {'username': username}
         try:
-            user = User.objects.get(email=username)
+            user = User.objects.get(**kwargs)
             
             if user.check_password(password) is True:
                 return user
