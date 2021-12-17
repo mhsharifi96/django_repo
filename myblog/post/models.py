@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import admin
+from django.utils.html import format_html
+
 # Create your models here.
 
 
@@ -70,6 +73,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    @admin.display()
+    def colored_title(self):
+        return format_html(
+            '<span style="color: red;">{}</span>',
+            
+            self.title,
+        )
 
 
 class SimplePost(models.Model):

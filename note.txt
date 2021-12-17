@@ -343,7 +343,7 @@ def login_maktab(request):
  https://programmer.help/blogs/django-log-output-to-log-file.html
  
  import logging
-logger = logging.getLogger('django
+logger = logging.getLogger('django')
  def testlog(request):
     test = Category.objects.all()
     print('test')
@@ -392,3 +392,41 @@ LOGGING ={
     }
 }
 # end
+
+
+#start 17 december
+class PostAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_on'
+    list_display =('title','shortdesc','created_on','view_birth_date','colored_title',)
+    empty_value_display = '-'
+
+    @admin.display(description='mohammad',empty_value="/\/")
+    def view_birth_date(self, obj):
+       
+        return format_html(
+            '<span style="color: red;">{}</span>',
+            obj.shortdesc
+        )
+    
+    # fields = (('title','shortdesc'),'desc',('location_lat','location_lng'))
+    # readonly_fields = ('title',)
+    fieldsets = (
+        (None, {
+            'fields': (('title','shortdesc'),'desc')
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': (('location_lat','location_lng'),),
+        }),
+    )
+    list_filter = ('title', 'created_on')
+    search_fields = ('owner',)
+    
+
+    # list_display_links = None
+    save_on_top = True
+    list_editable = ('shortdesc',)
+
+
+admin.site.register(Post,PostAdmin)
+#end  17 december
